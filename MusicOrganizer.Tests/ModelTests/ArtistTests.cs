@@ -24,5 +24,16 @@ namespace MusicOrganizer.Tests
       string result = newArtist.Name;
       Assert.AreEqual(name, result);
     }
+
+    [TestMethod]
+    public void SetName_SetNameValue_String()
+    {
+      string name = "Agnostic Front";
+      Artist newArtist = new Artist(name);
+      string updatedName = "Melvins";
+      newArtist.Name = updatedName;
+      string result = newArtist.Name;
+      Assert.AreEqual(updatedName, result);
+    }
   }
 }
