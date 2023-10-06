@@ -23,5 +23,16 @@ namespace MusicOrganizer.Tests
       string result = newRecord.Title;
       Assert.AreEqual(title, result);
     }
+
+    [TestMethod]
+    public void SetTitle_SetTitle_String()
+    {
+      string title = "Definitely Maybe";
+      Record newRecord = new Record(title);
+      string updatedTitle = "What's the Story, Morning Glory?";
+      newRecord.Title = updatedTitle;
+      string result = newRecord.Title;
+      Assert.AreEqual(updatedTitle, result);
+    }
   }
 }
