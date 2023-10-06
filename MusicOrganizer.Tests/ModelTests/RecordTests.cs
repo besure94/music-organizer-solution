@@ -71,5 +71,18 @@ namespace MusicOrganizer.Tests
       int result = newRecord.Id;
       Assert.AreEqual(1, result);
     }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectRecord_Record()
+    {
+      string title01 = "Up the Bracket";
+      string title02 = "The Libertines";
+      string title03 = "Is This It";
+      Record newRecord01 = new Record(title01);
+      Record newRecord02 = new Record(title02);
+      Record newRecord03 = new Record(title03);
+      Record result = Record.Find(2);
+      Assert.AreEqual(newRecord02, result);
+    }
   }
 }
