@@ -55,13 +55,13 @@ namespace MusicOrganizer.Tests
       CollectionAssert.AreEqual(newList, result);
     }
 
-    // [TestMethod]
-    // public void GetId_ReturnsArtistId_Int()
-    // {
-    //   string name = "Agent Orange";
-    //   Artist newArtist = new Artist(name);
-    //   int result = newArtist.Id;
-    //   Assert.AreEqual(1, result);
-    // }
+    [TestMethod]
+    public void GetId_ReturnsArtistId_Int()
+    {
+      string name = "Agent Orange";
+      Artist newArtist = new Artist(name);
+      int result = newArtist.Id;
+      Assert.AreEqual(1, result);
+    }
   }
 }

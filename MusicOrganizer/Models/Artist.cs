@@ -5,13 +5,14 @@ namespace MusicOrganizer.Models
   public class Artist
   {
     public string Name { get; set; }
-    // public int Id { get; }
+    public int Id { get; }
     private static List<Artist> _instances = new List<Artist> {};
 
     public Artist(string name)
     {
       Name = name;
       _instances.Add(this);
+      Id = _instances.Count;
     }
 
     public static List<Artist> GetAll()
