@@ -63,5 +63,16 @@ namespace MusicOrganizer.Tests
       int result = newArtist.Id;
       Assert.AreEqual(1, result);
     }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectArtist_Artist()
+    {
+      string name01 = "Dwarves";
+      string name02 = "The Brian Jonestown Massacre";
+      Artist newArtist01 = new Artist(name01);
+      Artist newArtist02 = new Artist(name02);
+      Artist result = Artist.Find(2);
+      Assert.AreEqual(newArtist02, result);
+    }
   }
 }
