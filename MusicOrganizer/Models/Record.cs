@@ -5,7 +5,7 @@ namespace MusicOrganizer.Models
   public class Record
   {
     public string Title { get; set; }
-    public string ArtworkUrl { get; }
+    public string ArtworkUrl { get; set; }
     public int Id { get; }
     private static List<Record> _instances = new List<Record> { };
 
