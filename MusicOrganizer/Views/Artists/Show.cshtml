@@ -13,7 +13,7 @@
     <body>
       @using MusicOrganizer.Models;
 
-      <h3>Here are all of the records by this artist:</h3>
+      <h3>Here are all of the albums by this artist:</h3>
 
       <ol>
         @foreach (Record record in @Model["records"])
@@ -22,7 +22,7 @@
         }
       </ol>
 
-      <p><a href='/artists/@Model["artist"].Id/records/new'>Add a new record</a></p>
+      <p><a href='/artists/@Model["artist"].Id/records/new'>Add a new album</a></p>
       <p><a href='/artists'>Return to artist list</a></p>
       <p><a href='/'>Return to home page</a></p>
     </body>

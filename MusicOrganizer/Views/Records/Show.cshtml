@@ -11,14 +11,14 @@
   </head>
   <div class="container">
     <body>
-      <h1>Record Details:</h1>
+      <h1>Album Details:</h1>
 
-      <h2>@Model["record"].Title</h2>
+      <h3>Album: @Model["record"].Title</h3>
       <h3>Artist: @Model["artist"].Name</h3>
 
-      <a href='/artists/@Model["artist"].Id/records/new'>Add another record</a>
+      <a href='/artists/@Model["artist"].Id/records/new'>Add another album</a>
       <br>
-      <a href="/artists">View all records</a>
+      <a href="/artists">View all albums</a>
     </body>
   </div>
 </html>

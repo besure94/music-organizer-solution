@@ -11,12 +11,12 @@
   </head>
   <div class="container">
     <body>
-      <h1>Add a new record to @Model.Name</h1>
+      <h1>Add a new album for @Model.Name</h1>
       <form action="/artists/@Model.Id/records" method="post">
         <input id="artistId" name="artistId" type="hidden" value="@Model.Id">
-        <label for="recordTitle">Record Title</label>
-        <input id="recordTitle" name="recordTitle" type="text">
-        <button type="submit">Add Record</button>
+        <label for="recordTitle">Album Title:</label>
+        <input id="recordTitle" name="recordTitle" type="text" placeholder="Enter title here">
+        <button type="submit">Add Album</button>
       </form>
     </body>
   </div>
