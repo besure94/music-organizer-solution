@@ -27,12 +27,13 @@
       @foreach (Artist artist in Model)
       {
         <h3><a href="/artists/@artist.Id">@artist.Name</a></h3>
+        <br>
       }
-      <p><a href="/">Return to home</a></p>
-      <br>
       <form action="artists/delete" method="post">
-        <button type="submit" name="button">Clear All Artists</button>
+        <button type="submit" name="button">Clear Artist List</button>
       </form>
+      <br>
+      <p><a href="/">Return to home</a></p>
     </body>
   </div>
 </html>
