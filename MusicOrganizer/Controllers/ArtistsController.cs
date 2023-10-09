@@ -50,5 +50,12 @@ namespace MusicOrganizer.Controllers
       model.Add("artist", foundArtist);
       return View("Show", model);
     }
+
+    [HttpPost("artists/delete")]
+    public ActionResult DeleteAll()
+    {
+      Artist.ClearAll();
+      return View();
+    }
   }
 }
