@@ -74,5 +74,18 @@ namespace MusicOrganizer.Tests
       Artist result = Artist.Find(2);
       Assert.AreEqual(newArtist02, result);
     }
+
+    [TestMethod]
+    public void AddRecord_AssociatesRecordWithArtist_RecordList()
+    {
+      string title = "Methodrone";
+      Record newRecord = new Record(title);
+      List<Record> newList = new List<Record> { newRecord };
+      string name = "The Brian Jonestown Massacre";
+      Artist newArtist = new Artist(name);
+      newArtist.AddRecord(newRecord);
+      List<Record> result = newArtist.Records;
+      CollectionAssert.AreEqual(newList, result);
+    }
   }
 }
