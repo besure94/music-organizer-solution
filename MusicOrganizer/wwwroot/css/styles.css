@@ -1,0 +1,40 @@
+a {
+  color: #008000 !important;
+  font-weight: 700;
+}
+
+body {
+  background: #000000 !important;
+}
+
+button {
+  background-color: #008000;
+  color: #000000;
+  font-weight: 700;
+}
+
+h1 {
+  color: #ffffff;
+}
+
+h3 {
+  color: #ffffff;
+}
+
+input {
+  font-weight: 700;
+}
+
+label {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+ol {
+  color:#ffffff;
+}
+
+p {
+  color: #ffffff;
+  font-weight: 700;
+}

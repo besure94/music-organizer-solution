@@ -1,3 +1,7 @@
+@{
+  Layout = "_Layout";
+}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +17,7 @@
     <body>
       @using MusicOrganizer.Models;
 
-      <h3>Here are all of the albums by this artist:</h3>
+      <h3>Albums by this artist:</h3>
 
       <ol>
         @foreach (Record record in @Model["records"])
