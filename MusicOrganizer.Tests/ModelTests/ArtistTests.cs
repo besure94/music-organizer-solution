@@ -78,7 +78,8 @@ namespace MusicOrganizer.Tests
     public void AddRecord_AssociatesRecordWithArtist_RecordList()
     {
       string title = "Methodrone";
-      Record newRecord = new Record(title);
+      string artworkUrl = "Methodrone URL";
+      Record newRecord = new Record(title, artworkUrl);
       List<Record> newList = new List<Record> { newRecord };
       string name = "The Brian Jonestown Massacre";
       Artist newArtist = new Artist(name);

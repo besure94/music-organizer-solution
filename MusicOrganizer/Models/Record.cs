@@ -5,12 +5,14 @@ namespace MusicOrganizer.Models
   public class Record
   {
     public string Title { get; set; }
+    public string ArtworkUrl { get; }
     public int Id { get; }
     private static List<Record> _instances = new List<Record> { };
 
-    public Record(string title)
+    public Record(string title, string artworkUrl)
     {
       Title = title;
+      ArtworkUrl = artworkUrl;
       _instances.Add(this);
       Id = _instances.Count;
     }
