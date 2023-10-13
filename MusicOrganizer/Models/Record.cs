@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace MusicOrganizer.Models
 {
@@ -17,19 +18,56 @@ namespace MusicOrganizer.Models
       Id = _instances.Count;
     }
 
+    public Record(string title, string artworkUrl, int id)
+    {
+      Title = title;
+      ArtworkUrl = artworkUrl;
+      Id = id;
+    }
+
     public static List<Record> GetAll()
     {
-      return _instances;
+      List<Record> allRecords = new List<Record>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "SELECT * FROM records;";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        int recordId = rdr.GetInt32(0);
+        string recordTitle = rdr.GetString(1);
+        string recordArtworkUrl = rdr.GetString(2);
+        Record newRecord = new Record(recordTitle, recordArtworkUrl, recordId);
+        allRecords.Add(newRecord);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allRecords;
+
     }
 
     public static void ClearAll()
     {
-      _instances.Clear();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "DELETE FROM records;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
     public static Record Find(int searchId)
     {
-      return _instances[searchId-1];
+      Record placeholderRecord = new Record("placeholder record", "placeholder artwork");
+      return placeholderRecord;
     }
   }
 }
