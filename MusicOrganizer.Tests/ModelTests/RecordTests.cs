@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using MusicOrganizer.Models;
@@ -9,6 +9,7 @@ namespace MusicOrganizer.Tests
   [TestClass]
   public class RecordTests : IDisposable
   {
+    public IConfiguration Configuration { get; set ; }
 
     public void Dispose()
     {
@@ -16,7 +17,9 @@ namespace MusicOrganizer.Tests
     }
     public RecordTests()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=3picodu$4991;port=3306;database=music_organizer_test;";
+      IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+      Configuration = builder.Build();
+      DBConfiguration.ConnectionString = Configuration["ConnectionStrings:TestConnection"];
     }
 
     // [TestMethod]
@@ -71,22 +74,25 @@ namespace MusicOrganizer.Tests
       CollectionAssert.AreEqual(newList, result);
     }
 
-    // [TestMethod]
-    // public void GetAll_ReturnsRecords_RecordList()
-    // {
-    //   string title01 = "Definitely Maybe";
-    //   string title02 = "What's the Story, Morning Glory?";
-    //   string title03 = "In the Graveyard";
-    //   string artworkUrl01 = "test URL one";
-    //   string artworkUrl02 = "test URL two";
-    //   string artworkUrl03 = "test URL three";
-    //   Record newRecord01 = new Record(title01, artworkUrl01);
-    //   Record newRecord02 = new Record(title02, artworkUrl02);
-    //   Record newRecord03 = new Record(title03, artworkUrl03);
-    //   List<Record> newList = new List<Record> { newRecord01, newRecord02, newRecord03 };
-    //   List<Record> result = Record.GetAll();
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
+    [TestMethod]
+    public void GetAll_ReturnsRecords_RecordList()
+    {
+      string title01 = "Definitely Maybe";
+      string title02 = "What's the Story, Morning Glory?";
+      string title03 = "In the Graveyard";
+      string artworkUrl01 = "test URL one";
+      string artworkUrl02 = "test URL two";
+      string artworkUrl03 = "test URL three";
+      Record newRecord01 = new Record(title01, artworkUrl01);
+      newRecord01.Save();
+      Record newRecord02 = new Record(title02, artworkUrl02);
+      newRecord02.Save();
+      Record newRecord03 = new Record(title03, artworkUrl03);
+      newRecord03.Save();
+      List<Record> newList = new List<Record> { newRecord01, newRecord02, newRecord03 };
+      List<Record> result = Record.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
 
     // [TestMethod]
     // public void GetId_RecordsInstantiateWithAnIdAndGetterReturns_Int()
@@ -112,5 +118,15 @@ namespace MusicOrganizer.Tests
     //   Record result = Record.Find(2);
     //   Assert.AreEqual(newRecord02, result);
     // }
+
+    [TestMethod]
+    public void Save_SavesToDataBase_RecordList()
+    {
+      Record testRecord = new Record("Victim in Pain", "albumart.jpg");
+      testRecord.Save();
+      List<Record> result = Record.GetAll();
+      List<Record> testList = new List<Record> { testRecord };
+      CollectionAssert.AreEqual(testList, result);
+    }
   }
 }

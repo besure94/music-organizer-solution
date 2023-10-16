@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace MusicOrganizer.Models
 {
@@ -7,7 +7,7 @@ namespace MusicOrganizer.Models
   {
     public string Title { get; set; }
     public string ArtworkUrl { get; set; }
-    public int Id { get; }
+    public int Id { get; set; }
     private static List<Record> _instances = new List<Record> { };
 
     public Record(string title, string artworkUrl)
@@ -25,25 +25,49 @@ namespace MusicOrganizer.Models
       Id = id;
     }
 
-    public override bool Equals(System.Object otherRecord)
-    {
-      if (!(otherRecord is Record))
-      {
-        return false;
-      }
-      else
-      {
-        Record newRecord = (Record) otherRecord;
-        bool titleEquality = (this.Title == newRecord.Title);
-        bool artworkUrlEquality = (this.ArtworkUrl == newRecord.ArtworkUrl);
-        return titleEquality && artworkUrlEquality;
-      }
-    }
+    // public override bool Equals(System.Object otherRecord)
+    // {
+    //   if (!(otherRecord is Record))
+    //   {
+    //     return false;
+    //   }
+    //   else
+    //   {
+    //     Record newRecord = (Record) otherRecord;
+    //     // bool idEquality = (this.Id == newRecord.Id);
+    //     bool titleEquality = (this.Title == newRecord.Title);
+    //     bool artworkUrlEquality = (this.ArtworkUrl == newRecord.ArtworkUrl);
+    //     return (titleEquality && artworkUrlEquality);
+    //   }
+    // }
+
+    // public void Save()
+    // {
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = "INSERT INTO records (title, artworkUrl) VALUES (@RecordTitle, @RecordArtworkUrl);";
+    //   MySqlParameter param = new MySqlParameter();
+    //   MySqlParameter paramTwo = new MySqlParameter();
+    //   param.ParameterName = "@RecordTitle";
+    //   paramTwo.ParameterName = "@RecordArtworkUrl";
+    //   param.Value = this.Title;
+    //   paramTwo.Value = this.ArtworkUrl;
+    //   cmd.Parameters.Add(param);
+    //   cmd.Parameters.Add(paramTwo);
+    //   cmd.ExecuteNonQuery();
+    //   Id = (int) cmd.LastInsertedId;
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    // }
 
     public static List<Record> GetAll()
     {
-      List<Record> allRecords = new List<Record>();
-      MySqlConnection conn = DB.Connection();
+      List<Record> allRecords = new List<Record> { };
+      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = "SELECT * FROM records;";
@@ -67,16 +91,7 @@ namespace MusicOrganizer.Models
 
     public static void ClearAll()
     {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = "DELETE FROM records;";
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
+
     }
 
     public static Record Find(int searchId)
