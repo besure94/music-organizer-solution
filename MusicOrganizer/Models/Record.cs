@@ -43,28 +43,28 @@ namespace MusicOrganizer.Models
       return Id.GetHashCode();
     }
 
-    // public void Save()
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = "INSERT INTO records (title, artworkUrl) VALUES (@RecordTitle, @RecordArtworkUrl);";
-    //   MySqlParameter param = new MySqlParameter();
-    //   MySqlParameter paramTwo = new MySqlParameter();
-    //   param.ParameterName = "@RecordTitle";
-    //   paramTwo.ParameterName = "@RecordArtworkUrl";
-    //   param.Value = this.Title;
-    //   paramTwo.Value = this.ArtworkUrl;
-    //   cmd.Parameters.Add(param);
-    //   cmd.Parameters.Add(paramTwo);
-    //   cmd.ExecuteNonQuery();
-    //   Id = (int) cmd.LastInsertedId;
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    // }
+    public void Save()
+    {
+      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "INSERT INTO records (title, artworkUrl) VALUES (@RecordTitle, @RecordArtworkUrl);";
+      MySqlParameter param = new MySqlParameter();
+      MySqlParameter paramTwo = new MySqlParameter();
+      param.ParameterName = "@RecordTitle";
+      paramTwo.ParameterName = "@RecordArtworkUrl";
+      param.Value = this.Title;
+      paramTwo.Value = this.ArtworkUrl;
+      cmd.Parameters.Add(param);
+      cmd.Parameters.Add(paramTwo);
+      cmd.ExecuteNonQuery();
+      // Id = (int) cmd.LastInsertedId;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
 
     public static List<Record> GetAll()
     {

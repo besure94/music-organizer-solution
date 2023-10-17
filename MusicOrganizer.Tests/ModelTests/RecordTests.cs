@@ -119,14 +119,14 @@ namespace MusicOrganizer.Tests
     //   Assert.AreEqual(newRecord02, result);
     // }
 
-    // [TestMethod]
-    // public void Save_SavesToDataBase_RecordList()
-    // {
-    //   Record testRecord = new Record("Victim in Pain", "albumart.jpg");
-    //   testRecord.Save();
-    //   List<Record> result = Record.GetAll();
-    //   List<Record> testList = new List<Record> { testRecord };
-    //   CollectionAssert.AreEqual(testList, result);
-    // }
+    [TestMethod]
+    public void Save_SavesToDataBase_RecordList()
+    {
+      Record testRecord = new Record("Victim in Pain", "albumart.jpg");
+      testRecord.Save();
+      List<Record> result = Record.GetAll();
+      List<Record> testList = new List<Record> { testRecord };
+      CollectionAssert.AreEqual(testList, result);
+    }
   }
 }
