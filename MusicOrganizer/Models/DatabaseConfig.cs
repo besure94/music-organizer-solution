@@ -1,6 +1,6 @@
 namespace MusicOrganizer.Models
 {
-  public static class DBConfiguration
+  public class DBConfiguration
   {
     public static string ConnectionString { get; set; }
   }

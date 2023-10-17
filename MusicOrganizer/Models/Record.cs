@@ -8,14 +8,11 @@ namespace MusicOrganizer.Models
     public string Title { get; set; }
     public string ArtworkUrl { get; set; }
     public int Id { get; set; }
-    private static List<Record> _instances = new List<Record> { };
 
     public Record(string title, string artworkUrl)
     {
       Title = title;
       ArtworkUrl = artworkUrl;
-      _instances.Add(this);
-      Id = _instances.Count;
     }
 
     public Record(string title, string artworkUrl, int id)
@@ -91,7 +88,16 @@ namespace MusicOrganizer.Models
 
     public static void ClearAll()
     {
-
+      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "DELETE FROM records;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
     public static Record Find(int searchId)

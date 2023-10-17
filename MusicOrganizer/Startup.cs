@@ -1,68 +1,43 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MusicOrganizer.Models;
 
 namespace MusicOrganizer
 {
     public class Startup
     {
-        // public Startup(IHostingEnvironment env)
-        // {
-        //     var builder = new ConfigurationBuilder()
-        //         .SetBasePath(env.ContentRootPath)
-        //         .AddJsonFile("appsettings.json");
-        //     Configuration = builder.Build();
-        // }
+        public IConfigurationRoot Configuration { get; }
 
-        // public IConfigurationRoot Configuration { get; set; }
+        public Startup(IWebHostEnvironment env)
+        {
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
 
-        // public void ConfigureServices(IServiceCollection services)
-        // {
-        //     services.AddMvc();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+        }
 
-        //     services.AddEntityFrameworkMySql()
-        //         .AddDbContext<MusicOrganizerContext>(options => options
-        //             .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseRouting();
+            app.UseStaticFiles(); //THIS IS NEW
 
-        //     services.AddIdentity<ApplicationUser, IdentityRole>()
-        //         .AddEntityFrameworkStores<MusicOrganizerContext>()
-        //         .AddDefaultTokenProviders();
+            app.UseEndpoints(routes =>
+            {
+                routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
 
-        //     services.Configure<IdentityOptions>(options =>
-        //     {
-        //         options.Password.RequireDigit = false;
-        //         options.Password.RequiredLength = 0;
-        //         options.Password.RequireLowercase = false;
-        //         options.Password.RequireNonAlphanumeric = false;
-        //         options.Password.RequireUppercase = false;
-        //         options.Password.RequiredUniqueChars = 0;
-        //     });
-        // }
-
-        // public void Configure(IApplicationBuilder app)
-        // {
-        //     app.UseStaticFiles();
-
-        //     app.UseDeveloperExceptionPage();
-
-        //     app.UseAuthentication();
-
-        //     app.UseMvc(routes =>
-        //     {
-        //         routes.MapRoute(
-        //             name: "default",
-        //             template: "{controller=Home}/{action=Index}/{id?}");
-        //     });
-
-        //     app.Run(async(context) =>
-        //     {
-        //         await context.Response.WriteAsync("Something went wrong!");
-        //     });
-        // }
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello, I didn't find a route!");
+            });
+        }
     }
-
 }
