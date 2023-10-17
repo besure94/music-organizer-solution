@@ -12,7 +12,9 @@ namespace MusicOrganizer.Models
     public Record(string title, string artworkUrl)
     {
       Title = title;
-      ArtworkUrl = artworkUrl;
+      ArtworkUrl = !string.IsNullOrEmpty(artworkUrl) ? artworkUrl : " ";
+      // ArtworkUrl = artworkUrl;
+      System.Console.WriteLine(ArtworkUrl);
     }
 
     public Record(string title, string artworkUrl, int id)

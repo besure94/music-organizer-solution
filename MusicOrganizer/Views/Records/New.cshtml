@@ -19,11 +19,11 @@
       <form action="/artists/@Model.Id/records" method="post">
         <input id="artistId" name="artistId" type="hidden" value="@Model.Id">
         <label for="recordTitle">Album Title:</label>
-        <input id="recordTitle" name="recordTitle" type="text" placeholder="Enter title here">
+        <input id="recordTitle" name="recordTitle" type="text" placeholder="Enter title here" required>
         <br>
         <br>
         <label for="recordArtwork">Album Artwork:</label>
-        <input id="recordArtwork" name="recordArtwork" type="text" placeholder="Enter artwork URL here">
+        <input id="recordArtwork" name="recordArtwork" type="text" placeholder="Enter artwork URL here" required>
         <br>
         <br>
         <button type="submit">Add Album</button>
