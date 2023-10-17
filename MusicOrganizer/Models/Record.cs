@@ -31,10 +31,10 @@ namespace MusicOrganizer.Models
       else
       {
         Record newRecord = (Record) otherRecord;
-        // bool idEquality = (this.Id == newRecord.Id);
+        bool idEquality = (this.Id == newRecord.Id);
         bool titleEquality = (this.Title == newRecord.Title);
         bool artworkUrlEquality = (this.ArtworkUrl == newRecord.ArtworkUrl);
-        return (titleEquality && artworkUrlEquality);
+        return (idEquality && titleEquality && artworkUrlEquality);
       }
     }
 
@@ -58,7 +58,7 @@ namespace MusicOrganizer.Models
       cmd.Parameters.Add(param);
       cmd.Parameters.Add(paramTwo);
       cmd.ExecuteNonQuery();
-      // Id = (int) cmd.LastInsertedId;
+      Id = (int) cmd.LastInsertedId;
       conn.Close();
       if (conn != null)
       {
