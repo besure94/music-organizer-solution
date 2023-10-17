@@ -58,13 +58,13 @@ namespace MusicOrganizer.Tests
     //   Assert.AreEqual(artworkUrl, result);
     // }
 
-    // [TestMethod]
-    // public void Equals_ReturnsTrueIfRecordsAreTheSame_Record()
-    // {
-    //   Record firstRecord = new Record("The Battle for Los Angeles", "album.jpg");
-    //   Record secondRecord = new Record("The Battle for Los Angeles", "album.jpg");
-    //   Assert.AreEqual(firstRecord, secondRecord);
-    // }
+    [TestMethod]
+    public void Equals_ReturnsTrueIfRecordsAreTheSame_Record()
+    {
+      Record firstRecord = new Record("The Battle for Los Angeles", "album.jpg");
+      Record secondRecord = new Record("The Battle for Los Angeles", "album.jpg");
+      Assert.AreEqual(firstRecord, secondRecord);
+    }
 
     [TestMethod]
     public void GetAll_ReturnsEmptyListFromDatabase_RecordList()

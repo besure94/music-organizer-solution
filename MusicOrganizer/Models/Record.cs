@@ -22,21 +22,26 @@ namespace MusicOrganizer.Models
       Id = id;
     }
 
-    // public override bool Equals(System.Object otherRecord)
-    // {
-    //   if (!(otherRecord is Record))
-    //   {
-    //     return false;
-    //   }
-    //   else
-    //   {
-    //     Record newRecord = (Record) otherRecord;
-    //     // bool idEquality = (this.Id == newRecord.Id);
-    //     bool titleEquality = (this.Title == newRecord.Title);
-    //     bool artworkUrlEquality = (this.ArtworkUrl == newRecord.ArtworkUrl);
-    //     return (titleEquality && artworkUrlEquality);
-    //   }
-    // }
+    public override bool Equals(System.Object otherRecord)
+    {
+      if (!(otherRecord is Record))
+      {
+        return false;
+      }
+      else
+      {
+        Record newRecord = (Record) otherRecord;
+        // bool idEquality = (this.Id == newRecord.Id);
+        bool titleEquality = (this.Title == newRecord.Title);
+        bool artworkUrlEquality = (this.ArtworkUrl == newRecord.ArtworkUrl);
+        return (titleEquality && artworkUrlEquality);
+      }
+    }
+
+    public override int GetHashCode()
+    {
+      return Id.GetHashCode();
+    }
 
     // public void Save()
     // {
