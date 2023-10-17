@@ -105,7 +105,7 @@ namespace MusicOrganizer.Tests
     }
 
     [TestMethod]
-    public void Find_ReturnsCorrectItemFromDatabase_Record()
+    public void Find_ReturnsCorrectRecordFromDatabase_Record()
     {
       Record newRecord = new Record("Oracular Spectacular", "artwork.jpg");
       newRecord.Save();
