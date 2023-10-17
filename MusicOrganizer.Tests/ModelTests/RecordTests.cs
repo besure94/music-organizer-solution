@@ -22,41 +22,41 @@ namespace MusicOrganizer.Tests
       DBConfiguration.ConnectionString = Configuration["ConnectionStrings:TestConnection"];
     }
 
-    // [TestMethod]
-    // public void RecordConstructor_CreatesInstanceOfRecord_Record()
-    // {
-    //   Record newRecord = new Record("test", "test URL");
-    //   Assert.AreEqual(typeof(Record), newRecord.GetType());
-    // }
+    [TestMethod]
+    public void RecordConstructor_CreatesInstanceOfRecord_Record()
+    {
+      Record newRecord = new Record("test", "test URL");
+      Assert.AreEqual(typeof(Record), newRecord.GetType());
+    }
 
-    // [TestMethod]
-    // public void GetTitle_ReturnsTitle_String()
-    // {
-    //   string title = "Definitely Maybe";
-    //   Record newRecord = new Record(title, "test URL");
-    //   string result = newRecord.Title;
-    //   Assert.AreEqual(title, result);
-    // }
+    [TestMethod]
+    public void GetTitle_ReturnsTitle_String()
+    {
+      string title = "Definitely Maybe";
+      Record newRecord = new Record(title, "test URL");
+      string result = newRecord.Title;
+      Assert.AreEqual(title, result);
+    }
 
-    // [TestMethod]
-    // public void SetTitle_SetTitle_String()
-    // {
-    //   string title = "Definitely Maybe";
-    //   Record newRecord = new Record(title, "test URL");
-    //   string updatedTitle = "What's the Story, Morning Glory?";
-    //   newRecord.Title = updatedTitle;
-    //   string result = newRecord.Title;
-    //   Assert.AreEqual(updatedTitle, result);
-    // }
+    [TestMethod]
+    public void SetTitle_SetTitle_String()
+    {
+      string title = "Definitely Maybe";
+      Record newRecord = new Record(title, "test URL");
+      string updatedTitle = "What's the Story, Morning Glory?";
+      newRecord.Title = updatedTitle;
+      string result = newRecord.Title;
+      Assert.AreEqual(updatedTitle, result);
+    }
 
-    // [TestMethod]
-    // public void GetArtworkUrl_ReturnsArtworkUrl_String()
-    // {
-    //   string artworkUrl = "test URL";
-    //   Record newRecord = new Record("Melvins", artworkUrl);
-    //   string result = newRecord.ArtworkUrl;
-    //   Assert.AreEqual(artworkUrl, result);
-    // }
+    [TestMethod]
+    public void GetArtworkUrl_ReturnsArtworkUrl_String()
+    {
+      string artworkUrl = "test URL";
+      Record newRecord = new Record("Melvins", artworkUrl);
+      string result = newRecord.ArtworkUrl;
+      Assert.AreEqual(artworkUrl, result);
+    }
 
     [TestMethod]
     public void Equals_ReturnsTrueIfRecordsAreTheSame_Record()
@@ -94,30 +94,26 @@ namespace MusicOrganizer.Tests
       CollectionAssert.AreEqual(newList, result);
     }
 
-    // [TestMethod]
-    // public void GetId_RecordsInstantiateWithAnIdAndGetterReturns_Int()
-    // {
-    //   string title = "Victim in Pain";
-    //   Record newRecord = new Record(title, "test URL");
-    //   int result = newRecord.Id;
-    //   Assert.AreEqual(1, result);
-    // }
+    [TestMethod]
+    public void GetId_RecordsInstantiateWithAnIdAndGetterReturns_Int()
+    {
+      string title = "Victim in Pain";
+      Record newRecord = new Record(title, "test URL");
+      newRecord.Save();
+      Record foundRecord = Record.Find(newRecord.Id);
+      Assert.AreEqual(foundRecord.Id, newRecord.Id);
+    }
 
-    // [TestMethod]
-    // public void Find_ReturnsCorrectRecord_Record()
-    // {
-    //   string title01 = "Up the Bracket";
-    //   string title02 = "The Libertines";
-    //   string title03 = "Is This It";
-    //   string artworkUrl01 = "test URL one";
-    //   string artworkUrl02 = "test URL two";
-    //   string artworkUrl03 = "test URL three";
-    //   Record newRecord01 = new Record(title01, artworkUrl01);
-    //   Record newRecord02 = new Record(title02, artworkUrl02);
-    //   Record newRecord03 = new Record(title03, artworkUrl03);
-    //   Record result = Record.Find(2);
-    //   Assert.AreEqual(newRecord02, result);
-    // }
+    [TestMethod]
+    public void Find_ReturnsCorrectItemFromDatabase_Record()
+    {
+      Record newRecord = new Record("Oracular Spectacular", "artwork.jpg");
+      newRecord.Save();
+      Record newRecordTwo = new Record("Echoes", "album.jpg");
+      newRecordTwo.Save();
+      Record foundRecord = Record.Find(newRecord.Id);
+      Assert.AreEqual(newRecord, foundRecord);
+    }
 
     [TestMethod]
     public void Save_SavesToDataBase_RecordList()
